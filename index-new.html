@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Tetris!</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="menu-wrap">
+        <div class="menu">
+        <div class="menu-content">
+            <h2 class="t-ucase">rules</h2>
+            <p class="rules"> Please use the <b class="key">UP</b> key to rotate your tetromino, and <b class="key">LEFT</b>
+            and <b class="key">RIGHT</b> to <br> move across the board. Pressing <b class="key">DOWN</b> will speed up the
+            tetromino.</p>
+            <button class="close fw-400">X</button>
+        </div>
+        </div>
+    </div>
+    <header>
+        <h1 class="fw-300 t-ucase">Welcome <br><span class="fw-400 t-wide t-big t-ucase">to tetris</span></h1>
+    </header>
+    <main class="game-area">
+        <div class="game">
+        <div class="grid"></div>
+        </div>
+        <section>
+        <div class="display">
+            <h1 class="score fw-400 t-ucase">Your Score <br> <span class="score-display t-ucase fw-300">0</span></h1>
+            <div class="previous-shape">
+            <div class="previous-grid"></div>
+            </div>
+            <h2 class="lines-display fw-400 t-ucase">Lines:<span class="lines-score">0</span></h2>
+        </div>
+        <button class="button t-ucase" href="#">Start </button>
+        <div class="winning-message" id="winningMessage">
+            <div data-winning-message-text>Your Score: <b id="screen_score">100</b></div>
+            <button id="restartButton">Play Again</button>
+        </div>
+        </section>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+</body>
+
+</html>
