@@ -13,7 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const menu = document.querySelector('.menu')
   const span = document.getElementsByClassName('close')[0]
   const scoreDisplay = document.querySelector('.score-display')
+  const screen_score = document.getElementById('screen_score')
   const linesDisplay = document.querySelector('.lines-score')
+  const winningMessageElement = document.getElementById('winningMessage')
+  const restartButton = document.getElementById('restartButton')
   let currentIndex = 0
   let currentRotation = 0
   const width = 10
@@ -143,27 +146,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   startBtn.addEventListener('click', () => {
     /*if(gameover){
-      draw()
-      timerId = setInterval(moveDown, 1000)
-      nextRandom = Math.floor(Math.random() * theTetrominoes.length)
-      displayShape()
-      console.log("gameover")
-      startBtn.innerHTML = "Pause"
-      for(let i=0 ; i<squares.length; i++){
-        if(squares[i].className != "block3"){
-          squares[i].classList.remove('block')
-          squares[i].classList.remove('block2')
-          squares[i].style.backgroundImage = "none"
-        }  
-      }
-      
-      
-    }else */if (timerId) {
+    }*/if (timerId) {
       clearInterval(timerId)
+      document.removeEventListener('keydown', control)
       timerId = null
       startBtn.innerHTML = "Start"
       
     } else {
+      document.addEventListener('keydown', control)
       draw()
       timerId = setInterval(moveDown, 1000)
       nextRandom = Math.floor(Math.random() * theTetrominoes.length)
@@ -210,10 +200,6 @@ document.addEventListener('DOMContentLoaded', () => {
       displayShape()
       addScore()
       gameOver()
-      /*if(gameover){
-        alert("Game Over");
-        startBtn.innerHTML = "Restart"
-      }*/
     }
   }
   freeze()
@@ -229,12 +215,36 @@ document.addEventListener('DOMContentLoaded', () => {
     current = theTetrominoes[random][currentRotation]
     draw()
   }
+  //Restart Game
+  function restartgame() {
+    draw()
+    timerId = setInterval(moveDown, 1000)
+    nextRandom = Math.floor(Math.random() * theTetrominoes.length)
+    displayShape()
+    console.log("gameover")
+    for(let i=0 ; i<squares.length; i++){
+      if(squares[i].className != "block3"){
+        squares[i].classList.remove('block')
+        squares[i].classList.remove('block2')
+        squares[i].style.backgroundImage = "none"
+      }  
+    }
+    document.addEventListener('keydown', control)
+    score = 0
+    scoreDisplay.innerHTML = score
+    winningMessageElement.classList.remove('show')
+  }
+  
+  //Restart Game
+  restartButton.addEventListener('click', restartgame)
 
   //Game Over
   function gameOver() {
     if (current.some(index => squares[currentPosition + index].classList.contains('block2'))) {
-      scoreDisplay.innerHTML =  "END"
+      document.removeEventListener('keydown', control)
       clearInterval(timerId)
+      winningMessageElement.classList.add('show')
+      screen_score.innerHTML = score
       //return true 
     }
   }
@@ -286,9 +296,5 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   //Styling eventListeners
-  
-  span.addEventListener('click', () => {
-    menu.style.display = 'none'
-  })
 
 })
