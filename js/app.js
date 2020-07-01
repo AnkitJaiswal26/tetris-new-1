@@ -207,29 +207,12 @@ document.addEventListener('DOMContentLoaded', () => {
   //Rotate the Tetromino
   function rotate() {
     undraw()
-    var isAtRightEdge = current.some(index => (currentPosition + index) % width === width - 1)
-    var isAtRightedge = current.some(index => (currentPosition + index) % width == width - 2)
-    if( ( current == theTetrominoes[4][2] || current == theTetrominoes[4][0]  ) && ( isAtRightEdge || isAtRightedge) )  {
-      if( (current == theTetrominoes[4][1] || current == theTetrominoes[4][2] ) && (!isAtRightedge || !isAtRightEdge) ) {
-        currentRotation++
-        console.log(currentRotation)
-        if (currentRotation === current.length) {
-          currentRotation = 0
-        }
-        current = theTetrominoes[random][currentRotation]
-      }
-      else{
-        current = current
-      }
+    currentRotation++
+    console.log(currentRotation)
+    if (currentRotation === current.length) {
+      currentRotation = 0
     }
-    else{
-      currentRotation++
-      console.log(currentRotation)
-      if (currentRotation === current.length) {
-        currentRotation = 0
-      }
-      current = theTetrominoes[random][currentRotation]
-    }
+    current = theTetrominoes[random][currentRotation]
     draw()
   }
   //Restart Game
