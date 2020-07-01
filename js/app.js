@@ -113,6 +113,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
 
+  console.log(theTetrominoes[4][1])
+
   //Randomly Select Tetromino
   let random = Math.floor(Math.random() * theTetrominoes.length)
   let current = theTetrominoes[random][currentRotation]
@@ -145,8 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   startBtn.addEventListener('click', () => {
-    /*if(gameover){
-    }*/if (timerId) {
+    if (timerId) {
       clearInterval(timerId)
       document.removeEventListener('keydown', control)
       timerId = null
@@ -159,7 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
       nextRandom = Math.floor(Math.random() * theTetrominoes.length)
       displayShape()
       startBtn.innerHTML = "Pause"
-      gameover = false
     }
   })
 
@@ -207,12 +207,29 @@ document.addEventListener('DOMContentLoaded', () => {
   //Rotate the Tetromino
   function rotate() {
     undraw()
-    currentRotation++
-    console.log(currentRotation)
-    if (currentRotation === current.length) {
-      currentRotation = 0
+    var isAtRightEdge = current.some(index => (currentPosition + index) % width === width - 1)
+    var isAtRightedge = current.some(index => (currentPosition + index) % width == width - 2)
+    if( ( current == theTetrominoes[4][2] || current == theTetrominoes[4][0]  ) && ( isAtRightEdge || isAtRightedge) )  {
+      if( (current == theTetrominoes[4][1] || current == theTetrominoes[4][2] ) && (!isAtRightedge || !isAtRightEdge) ) {
+        currentRotation++
+        console.log(currentRotation)
+        if (currentRotation === current.length) {
+          currentRotation = 0
+        }
+        current = theTetrominoes[random][currentRotation]
+      }
+      else{
+        current = current
+      }
     }
-    current = theTetrominoes[random][currentRotation]
+    else{
+      currentRotation++
+      console.log(currentRotation)
+      if (currentRotation === current.length) {
+        currentRotation = 0
+      }
+      current = theTetrominoes[random][currentRotation]
+    }
     draw()
   }
   //Restart Game
